@@ -6,29 +6,138 @@
     <title>Clone do YouTube</title>
     <style>
         :root {
-            --background-light: #f9f9f9;
-            --text-light: #000;
-            --background-dark: #181818;
-            --text-dark: #fff;
+            --background-color: #181818;
+            --sidebar-color: #212121;
+            --text-color: #ffffff;
+            --hover-color: #383838;
+            --highlight-color: #ff0000;
         }
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: var(--background-light); color: var(--text-light); transition: background 0.3s, color 0.3s; }
-        header { background: #ff0000; color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 24px; font-weight: bold; }
-        header input { width: 50%; padding: 8px; border: none; border-radius: 20px; }
-        .container { display: flex; }
-        .sidebar { width: 240px; background: #fff; padding: 15px; height: 100vh; box-shadow: 2px 0 5px rgba(0,0,0,0.1); transition: background 0.3s; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar ul li { padding: 10px; font-size: 16px; cursor: pointer; }
-        .sidebar ul li:hover { background: #f0f0f0; }
-        .content { flex-grow: 1; padding: 20px; display: flex; flex-wrap: wrap; }
-        .video { width: 300px; margin: 15px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: background 0.3s; }
-        .video img { width: 100%; border-radius: 8px; }
-        .video p { margin: 10px 0 0; font-weight: bold; }
-        .theme-toggle { padding: 10px; cursor: pointer; background: #ff0000; color: white; border: none; border-radius: 5px; margin: 10px; }
-        body.dark-mode { background: var(--background-dark); color: var(--text-dark); }
-        body.dark-mode .sidebar { background: #202020; }
-        body.dark-mode .sidebar ul li:hover { background: #303030; }
-        body.dark-mode .video { background: #282828; }
+
+        body.light {
+            --background-color: #f9f9f9;
+            --sidebar-color: #ffffff;
+            --text-color: #000000;
+            --hover-color: #f0f0f0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--sidebar-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--hover-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--highlight-color);
+        }
+
+        header input {
+            width: 50%;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            background: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--hover-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--sidebar-color);
+            padding: 15px;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li:hover {
+            background: var(--hover-color);
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .video {
+            background: var(--sidebar-color);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+        }
+
+        .video img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .video p {
+            margin: 10px 0 0;
+            font-weight: bold;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .category {
+            background: var(--hover-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--text-color);
+        }
+
+        .category:hover {
+            background: var(--highlight-color);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -40,14 +149,22 @@
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li>Início</li>
-                <li>Em alta</li>
-                <li>Inscrições</li>
-                <li>Biblioteca</li>
-                <li>Histórico</li>
+                <li>🏠 Início</li>
+                <li>🔥 Em alta</li>
+                <li>📺 Inscrições</li>
+                <li>🎵 YouTube Music</li>
+                <li>📚 Biblioteca</li>
+                <li>🕒 Histórico</li>
             </ul>
         </div>
         <div class="content">
+            <div class="categories">
+                <div class="category">Tudo</div>
+                <div class="category">Música</div>
+                <div class="category">Jogos</div>
+                <div class="category">Ao vivo</div>
+                <div class="category">Filmes</div>
+            </div>
             <div class="video">
                 <img src="https://via.placeholder.com/300" alt="Thumbnail">
                 <p>Título do vídeo</p>
@@ -62,9 +179,10 @@
             </div>
         </div>
     </div>
+
     <script>
         function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light');
         }
     </script>
 </body>
